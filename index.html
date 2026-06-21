@@ -1,19 +1,149 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>CERTIFICATES</title>
+    <title>Certificates</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .tile {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #f9f9f9;
+            transition: 0.3s;
+        }
+
+        .tile:hover {
+            transform: scale(1.03);
+        }
+
+        .title {
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+            background: #eee;
+        }
+
+        /* small preview */
+        .preview {
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .preview iframe {
+            width: 100%;
+            height: 400px; /* zoomed crop effect */
+            transform: scale(0.5);
+            transform-origin: top left;
+            border: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            width: 90%;
+            height: 90%;
+            margin: 2% auto;
+            background: white;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .modal iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+    </style>
 </head>
+
 <body>
 
-<h1>CERTIFICATES</h1>
+<h1>Certificates</h1>
 
-<iframe src="Certificates/Claude-Code-101.pdf" width="100%" height="600px"></iframe>
+<div class="grid">
 
-<iframe src="Certificates/Claude-Code-in-Action.pdf" width="100%" height="600px"></iframe>
+    <div class="tile" onclick="openPDF('Certificates/Claude-Code-101.pdf')">
+        <div class="preview">
+            <iframe src="Certificates/Claude-Code-101.pdf"></iframe>
+        </div>
+        <div class="title">Claude Code 101</div>
+    </div>
 
-<iframe src="Certificates/Introduction-to-subagents.pdf" width="100%" height="600px"></iframe>
+    <div class="tile" onclick="openPDF('Certificates/Claude-Code-in-Action.pdf')">
+        <div class="preview">
+            <iframe src="Certificates/Claude-Code-in-Action.pdf"></iframe>
+        </div>
+        <div class="title">Claude Code in Action</div>
+    </div>
 
-<iframe src="Certificates/Introduction-to-agent-skills.pdf" width="100%" height="600px"></iframe>
+    <div class="tile" onclick="openPDF('Certificates/Introduction-to-subagents.pdf')">
+        <div class="preview">
+            <iframe src="Certificates/Introduction-to-subagents.pdf"></iframe>
+        </div>
+        <div class="title">Introduction to Subagents</div>
+    </div>
+
+    <div class="tile" onclick="openPDF('Certificates/Introduction-to-agent-skills.pdf')">
+        <div class="preview">
+            <iframe src="Certificates/Introduction-to-agent-skills.pdf"></iframe>
+        </div>
+        <div class="title">Agent Skills</div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closePDF()">&times;</span>
+        <iframe id="pdfViewer"></iframe>
+    </div>
+</div>
+
+<script>
+    function openPDF(file) {
+        document.getElementById("pdfViewer").src = file;
+        document.getElementById("modal").style.display = "block";
+    }
+
+    function closePDF() {
+        document.getElementById("modal").style.display = "none";
+        document.getElementById("pdfViewer").src = "";
+    }
+</script>
 
 </body>
 </html>
